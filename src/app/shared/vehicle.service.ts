@@ -17,8 +17,8 @@ export class VehicleService {
   constructor(public firestore : AngularFirestore) {
     this.vehicleCollection = this.firestore;
     // https://stackoverflow.com/questions/46915002/argument-of-type-string-null-is-not-assignable-to-parameter-of-type-string
-    this.allvehicles = firestore.collection('ActiveVehicles', ref => ref.where('Email', '==', JSON.parse(localStorage.getItem('token') || ''))).valueChanges();
-    this.activevehicles = firestore.collection('VehicleInfo', ref => ref.where('Email', '==', JSON.parse(localStorage.getItem('token') || ''))).valueChanges();
+    this.allvehicles = firestore.collection('ActiveVehicles', ref => ref.where('Email', '==', JSON.parse(localStorage.getItem('token') || '{}'))).valueChanges();
+    this.activevehicles = firestore.collection('VehicleInfo', ref => ref.where('Email', '==', JSON.parse(localStorage.getItem('token') || '{}'))).valueChanges();
   }
 
   getVehicles() {
@@ -45,12 +45,12 @@ export class VehicleService {
     this.vehicleCollection.collection('ActiveVehicles').add({
       VehicleNumber:vehiclenumber,
       PhoneNumber:phonenumber,
-      Email:JSON.parse(localStorage.getItem('token') || '')
+      Email:JSON.parse(localStorage.getItem('token') || '{}')
     });
     this.vehicleCollection.collection('VehicleInfo').add({
       VehicleNumber:vehiclenumber,
       PhoneNumber:phonenumber,
-      Email:JSON.parse(localStorage.getItem('token') || '')
+      Email:JSON.parse(localStorage.getItem('token') || '{}')
     });
   }
   }
