@@ -19,7 +19,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     let loader = new Loader({
-      apiKey: 'AIzaSyADFXygGc0SwvJ3tZHBHvbxJ-cXuGZzFe4'
+      apiKey: ''
     })
     loader.load().then(() => {
       new google.maps.Map(document.getElementById("map") as HTMLElement,{
