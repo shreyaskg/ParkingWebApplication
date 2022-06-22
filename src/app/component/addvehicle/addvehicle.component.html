@@ -1,0 +1,19 @@
+<div class = "container" style="margin-top: 50px;">
+  <div class = "row gx-5">
+    <br>
+      <div class = "card">
+        <div class = "wrapper">
+          <img class = "card-img-top" src = "assets\CarTemplate1.jpg">
+        </div>
+        <form (ngSubmit) = "onSubmit()" class="col s6">
+          <div class="row">
+            <div class = "input-field col s6">
+              <label>Vehicle Number</label>
+              <input type = "text" placeholder = "Add Vehicle" name = "vehicle" [(ngModel)] = "vehiclenumber">
+            </div>
+          </div>
+          <input type="submit" value ="Add vehicle" class = "btn">
+        </form>
+      </div>
+    </div>
+  </div>

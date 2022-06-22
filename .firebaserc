@@ -1,0 +1,21 @@
+{
+  "targets": {
+    "parkingsystem-25c52": {
+      "hosting": {
+        "firebase-angular-crud": [
+          "parkingsystem-25c52"
+        ]
+      }
+    },
+    "parkingsystem-946bf": {
+      "hosting": {
+        "firebase-angular-crud": [
+          "parkingsystem-946bf"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "parkingsystem-946bf"
+  }
+}

@@ -2,23 +2,24 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider} from '@angular/fire/auth'
 import { Router } from '@angular/router';
-
+import { getAuth ,signInWithEmailAndPassword} from "firebase/auth";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private fireauth : AngularFireAuth, private router : Router) { }
-
+  constructor(private fireauth : AngularFireAuth, private router : Router, private db: AngularFirestore) { }
   // login method
   login(email : string, password : string) {
-    this.fireauth.signInWithEmailAndPassword(email,password).then( res => {
-        localStorage.setItem('token','true');
 
+    this.fireauth.signInWithEmailAndPassword(email,password).then( res => {
+        localStorage.setItem("token",res.user?.uid as string);
         if(res.user?.emailVerified == true) {
-          this.router.navigate(['dashboard']);
-        } else {
-          this.router.navigate(['/varify-email']);
+        }
+        else {
+          alert('Account Not Activated, check your email')
         }
 
     }, err => {
@@ -30,12 +31,15 @@ export class AuthService {
   // register method
   register(email : string, password : string) {
     this.fireauth.createUserWithEmailAndPassword(email, password).then( res => {
-      alert('Registration Successful');
       this.sendEmailForVarification(res.user);
+      alert('Account registered, check your email for the authentication')
+      return this.db.collection('Users').doc(res.user?.uid).set({
+        authenticated:true
+      });
+
+    }).then(() => {
+      alert('Registration Successful, check you email for the authentication link');
       this.router.navigate(['/login']);
-    }, err => {
-      alert(err.message);
-      this.router.navigate(['/register']);
     })
   }
 
@@ -52,9 +56,9 @@ export class AuthService {
   // forgot password
   forgotPassword(email : string) {
       this.fireauth.sendPasswordResetEmail(email).then(() => {
-        this.router.navigate(['/varify-email']);
+
       }, err => {
-        alert('Something went wrong');
+        alert('Something went wrong[Forgot Password error');
       })
   }
 
@@ -62,9 +66,8 @@ export class AuthService {
   sendEmailForVarification(user : any) {
     console.log(user);
     user.sendEmailVerification().then((res : any) => {
-      this.router.navigate(['/varify-email']);
     }, (err : any) => {
-      alert('Something went wrong. Not able to send mail to your email.')
+      alert('Something went wrong[Verification error].')
     })
   }
 
@@ -72,8 +75,10 @@ export class AuthService {
   googleSignIn() {
     return this.fireauth.signInWithPopup(new GoogleAuthProvider).then(res => {
 
-      this.router.navigate(['/dashboard']);
-      localStorage.setItem('token',JSON.stringify(res.user?.uid));
+      this.db.collection('Users').doc(res.user?.uid).set({
+        authenticated:true
+      })
+      localStorage.setItem('token',JSON.stringify(res.user?.email));
 
     }, err => {
       alert(err.message);

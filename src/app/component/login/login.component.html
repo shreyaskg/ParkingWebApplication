@@ -1,43 +1,140 @@
-<div class="container-fluid">
-    <div class="row mt-5">
-        <div class="col"></div>
-        <div class="col-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <h4 class="text-dark text-muted">Login</h4>
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email</label>
-                          <input type="email" class="form-control" name="email" [(ngModel)]="email">
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" name="password" [(ngModel)]="password">
-                        </div>
-                        <button type="button" class="btn btn-info" (click)="login()">Login</button>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a href="/register" style="text-decoration: none;">Need Account ? <span class="text-danger">Register</span></a>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="/forgot-password" class="text-dark" style="text-decoration: none;"> Forgot Password ? </a>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <a (click)="signInWithGoogle()" style="text-decoration: none;cursor: pointer;">
-                                <div class="card shadow text-center">
-                                    <div class="card-body">
-                                        <img src="../../../assets/icons8-google-48.png" alt="" height="24px" width="24px"> Sign In with Google
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </form>
-                </div>
+<ng-template #loggedIn>
+<div class="container-fluid" style="margin-top:150px; width:350px">
+  <form>
+      <div class="mb-3">
+          <h4 class="text-dark text-muted">Login</h4>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="email">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="password">
+      </div>
+      <button type="button" class="btn btn-info" (click)="login()">Login</button>
+      <div class="row">
+          <div class="col-md-6">
+              <a href="/register" style="text-decoration: none;">Need Account ? <span class="text-danger">Register</span></a>
+          </div>
+          <div class="col-md-6">
+              <a href="/forgot-password" class="text-dark" style="text-decoration: none;"> Forgot Password ? </a>
+          </div>
+      </div>
+      <div class="row mt-2">
+          <a (click)="signInWithGoogle()" style="text-decoration: none;cursor: pointer;">
+              <div class="card shadow text-center">
+                  <div class="card-body">
+                      <img src="../../../assets/icons8-google-48.png" alt="" height="24px" width="24px"> Sign In with Google
+                  </div>
+              </div>
+          </a>
+      </div>
+  </form>
+</div>
+</ng-template>
+
+<div *ngIf="Credentials; else loggedIn">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"> Parking System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link" (click) = "getActiveVehicles()">Active Vehicles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"(click) = "getVehicles()">History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click) = "logOut()">Log Out</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href= "/locator">Locator</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h6 style="font-weight: normal;">Vehicles Linked To your account</h6>
+  </div>
+  <div class="container">
+    <div *ngIf="VehicleList?.length > 0; else noVehicles">
+      <div class = "container" style="margin-top: 50px;">
+        <div class = "row gx-5">
+          <h4 style="font-weight: normal;">Welcome {{Credentials}}</h4>
+          <br>
+          <div *ngFor="let Vehicle of VehicleList" class = "shadow col-sm-3 p-3 mb-5 bg-white rounded" id = "Property-List">
+            <div class = "card">
+              <div class = "wrapper">
+                <img class = "card-img-top" src = "assets\CarTemplate1.jpg">
+              </div>
+              <div class = "container">
+                <h4 style="font-weight: normal;">{{Vehicle.VehicleNumber}}</h4>
+                <h6 style="font-weight: normal;">Email       : {{Vehicle.Email}}</h6>
+                <h6 style="font-weight: normal;">Phonenumber : {{Vehicle.PhoneNumber}}</h6>
+                <h6 style="font-weight: normal;">Lot         : {{Vehicle.LotId}}</h6>
+                <h6 style="font-weight: normal;">Charges     : {{Vehicle.Charges}}</h6>
+                <br>
+              </div>
+              <ul class="list-inline member-icons" id = "button-layout">
+                <li class="list-inline-item">
+                  <button class = "cart" id = "Charges-button">Charges</button>
+                </li>
+                <br>
+                <br>
+              </ul>
+            </div>
+          </div>
+            <br>
+
+
+          </div>
+      </div>
+      </div>
+  </div>
+
+<ng-template #noVehicles>
+  <hr>
+  <div class="container" style="margin-top: 50px;">
+    <h5>No vehicles linked to your account</h5>
+  </div>
+</ng-template>
+<div class = "container">
+  <div class="shadow col-sm-3 p-3 mb-5 bg-white rounded">
+    <div class = "card">
+      <div class = "wrapper">
+        <img class = "card-img-top" src = "assets\CarTemplate1.jpg">
+      </div>
+      <form (ngSubmit) = "onSubmit()" class="col s6">
+          <div class="container">
+            <div class = "input-field col s6">
+              <input type = "text" placeholder = "Vehicle Number" name = "vehicle" [(ngModel)] = "vehiclenumber">
+            </div>
+            <br>
+            <div class = "input-field col s6">
+              <input type = "text" placeholder = "Phone Number" name = "vehicle" [(ngModel)] = "phonenumber">
+            </div>
+            <br>
+            <div class="mb-3">
+              <label for="formFileSm" class="form-label">Vehicle's Image(Optional)</label>
+              <input class="form-control-sm" type="file" id="formFile" placeholder="Upload Image">
+            </div>
+            <div>
+              <input type="submit" value ="Add vehicle" class = "btn btn-success">
             </div>
         </div>
-        <div class="col"></div>
+        <br>
+      </form>
+      <br>
     </div>
+    </div>
+  </div>
 </div>
+
+
+

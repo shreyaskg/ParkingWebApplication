@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileuploadComponent } from './fileupload.component';
+import { LocatorComponent } from './locator.component';
 
-describe('FileuploadComponent', () => {
-  let component: FileuploadComponent;
-  let fixture: ComponentFixture<FileuploadComponent>;
+describe('LocatorComponent', () => {
+  let component: LocatorComponent;
+  let fixture: ComponentFixture<LocatorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FileuploadComponent ]
+      declarations: [ LocatorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FileuploadComponent);
+    fixture = TestBed.createComponent(LocatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

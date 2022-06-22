@@ -1,0 +1,118 @@
+<div *ngIf="ParkingLotList.length > 0; else noLots"></div>
+  <div class = "container" style="margin-top:75px">
+    <div class = "row gx-5">
+      <h5>Lots Nearby</h5>
+      <div *ngFor="let Lot of ParkingLotList" class = "shadow col-sm-3 p-3 mb-5 bg-white rounded" id = "Property-List">
+        <div class = "card">
+          <div class = "wrapper">
+            <img class = "card-img-top" src = "assets\ParkingLot.png">
+          </div>
+          <br>
+          <div class = "container">
+            <h4 style="font-weight: normal;">Occupancy : {{Lot.Occupied}}/{{Lot.Capacity}}</h4>
+            <h5 style="font-weight: normal;">{{Lot.LotId}}</h5>
+            <!-- <div *ngFor="let Slot in Lot.Slots">
+              <h5 style="font-weight: normal;">Slot:{{Slot}}</h5>
+            </div> -->
+            <br>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <h6>Slot1</h6>
+                </div>
+                <div class="col-sm">
+                  <div *ngIf="Lot.Slot1==0; else redLight">
+                    <div style = "height: 25px;
+                    width: 25px;
+                    background-color:rgb(124,252,0);
+                    border-radius: 50%;
+                    display: inline-block;"></div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <h6>Slot2</h6>
+                </div>
+                <div class="col-sm">
+                  <div *ngIf="Lot.Slot2==0; else redLight">
+                    <div style = "height: 25px;
+                    width: 25px;
+                    background-color:rgb(124,252,0);
+                    border-radius: 50%;
+                    display: inline-block;"></div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <h6>Slot3</h6>
+                </div>
+                <div class="col-sm">
+                  <div *ngIf="Lot.Slot3==0; else redLight">
+                    <div style = "height: 25px;
+                    width: 25px;
+                    background-color:rgb(124,252,0);
+                    border-radius: 50%;
+                    display: inline-block;"></div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <h6>Slot4</h6>
+                </div>
+                <div class="col-sm">
+                  <div *ngIf="Lot.Slot4==0; else redLight">
+                    <div style = "height: 25px;
+                    width: 25px;
+                    background-color:rgb(124,252,0);
+                    border-radius: 50%;
+                    display: inline-block;"></div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <h6>Slot5</h6>
+                </div>
+                <div class="col-sm">
+                  <div *ngIf="Lot.Slot5==0; else redLight">
+                    <div style = "height: 25px;
+                    width: 25px;
+                    background-color:rgb(124,252,0);
+                    border-radius: 50%;
+                    display: inline-block;"></div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <h6>Slot6</h6>
+                </div>
+                <div class="col-sm">
+                  <div *ngIf="Lot.Slot6==0; else redLight">
+                    <div style = "height: 25px;
+                    width: 25px;
+                    background-color:rgb(124,252,0);
+                    border-radius: 50%;
+                    display: inline-block;"></div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <ng-template #redLight>
+                    <div style = "height: 25px;
+                    width: 25px;
+                    background-color:red;
+                    border-radius: 50%;
+                    display: inline-block;"></div>
+                  </ng-template>
+                </div>
+            <br>
+          </div>
+          <ul class="list-inline member-icons" id = "button-layout">
+            <li class="list-inline-item">
+              <button class = "cart" id = "Book-Slot">Book Slot</button>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noLots>
+  <hr>
+  <h5>Lots lot available</h5>
+</ng-template>
+<br>
+<br>
