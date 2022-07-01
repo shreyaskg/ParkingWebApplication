@@ -41,6 +41,19 @@ export class LocatorComponent implements OnInit {
       Charges:0,
       LotId:"DSCE"
     })
+    this.vehicleService.firestore.collection('ActiveVehicles').add({
+      VehicleNumber:this.vehiclenumber,
+      PhoneNumber:this.phonenumber,
+      Email:JSON.parse(localStorage.getItem('token') || '{}'),
+      CheckIn: new Date(),
+      CheckOut:0,
+      Charges:0,
+      LotId:"DSCE"
+    })
+    const random_list = ['Slot1', 'Slot2', 'Slot3', 'Slot4', 'Slot5', 'Slot6']
+    let random_number = Math.floor(Math.random() * 6);
+
+    this.vehicleService.firestore.collection('SlotInfo').add()
     alert("Slot has been Allocated, your billing period starts from now")
 
   }

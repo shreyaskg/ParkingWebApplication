@@ -19,6 +19,15 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
 
+    let loader = new Loader({
+      apiKey: ''
+    })
+    loader.load().then(() => {
+      new google.maps.Map(document.getElementById("map") as HTMLElement,{
+        center: {lat:12.909477, lng:77.566833},
+        zoom:17
+      })
+    })
   }
   submitResponse() {
     this.ResponsesService.updateResponse(this.Name, this.Email, this.FullNumber, this.Message);

@@ -114,34 +114,14 @@
             <br>
           </div>
           <div *ngIf="Lot.Occupied != Lot.Capacity || Lot.Occupied == 0; else noboob">
-          <ul class="list-inline member-icons" id = "button-layout">
-            <div class = "container" style="margin-top: 50px;">
-              <div class = "row gx-5">
-                <br>
-                  <div class = "card">
-                    </div>
-                    <form (ngSubmit) = "bookSlot()" class="col s6">
-                      <div class="row">
-                        <div class = "input-field col s6">
-                          <input type = "text" placeholder = "Vehicle Number" name = "vehicle" [(ngModel)] = "vehiclenumber">
-                          <br>
-                          <input type = "text" placeholder = "Phone Number" name = "vehicle" [(ngModel)] = "phonenumber">
-                          <br>
-                        </div>
-                      </div>
-                    </form>
-                </div>
-              </div>
-
-            <button type="button" class="btn btn-danger" (click) = "bookSlot()">Book Slot</button>
-            <br>
-          </ul>
+            <form (ngSubmit) = "bookSlot()" class="col s6">
+                  <input type = "text" placeholder = "Vehicle Number" name = "vehicle" [(ngModel)] = "vehiclenumber">
+                  <input type = "text" placeholder = "Phone Number" name = "vehicle" [(ngModel)] = "phonenumber">
+                  <button type="button" class="btn btn-danger" (click) = "bookSlot()">Book Slot</button>
+            </form>
         </div>
           <ng-template #noboob>
-            <div>
             <button type="button" class="btn btn-danger" disabled>Book Slot</button>
-            <br>
-          </div>
           </ng-template>
         </div>
         <br>

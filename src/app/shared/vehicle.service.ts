@@ -45,12 +45,20 @@ export class VehicleService {
     this.vehicleCollection.collection('ActiveVehicles').add({
       VehicleNumber:vehiclenumber,
       PhoneNumber:phonenumber,
-      Email:JSON.parse(localStorage.getItem('token') || '{}')
+      Email:JSON.parse(localStorage.getItem('token') || '{}'),
+      CheckIn: new Date(),
+      CheckOut:0,
+      Charges:0,
+      LotId:"DSCE"
     });
     this.vehicleCollection.collection('VehicleInfo').add({
       VehicleNumber:vehiclenumber,
       PhoneNumber:phonenumber,
-      Email:JSON.parse(localStorage.getItem('token') || '{}')
+      Email:JSON.parse(localStorage.getItem('token') || '{}'),
+      CheckIn: new Date(),
+      CheckOut:0,
+      Charges:0,
+      LotId:"DSCE"
     });
   }
   }

@@ -9,5 +9,5 @@ export const firebaseConfig = {
     messagingSenderId: '41429715745',
     measurementId: 'G-478F9R7XY7',
   },
-  production:true
+  production: true
 };
